@@ -19,8 +19,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Usage
 ```
-java -jar Edmonds.jar [-n] file1 file2 ... <br/>
--n	if specified, program won't create .dot output files <br/>
+java -jar Edmonds.jar [-n] file1 file2 ... 
+-n	if specified, program won't create .dot output files 
 ```
 Files are parsed by a simple parser which doesn't handle any errors in the input file. Input file should have a format of
 - a list of vertices on the first line, separated by comma
