@@ -18,18 +18,22 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
 
 ## Usage
+```
 java -jar Edmonds.jar [-n] file1 file2 ... <br/>
 -n	if specified, program won't create .dot output files <br/>
+```
 Files are parsed by a simple parser which doesn't handle any errors in the input file. Input file should have a format of
 - a list of vertices on the first line, separated by comma
 - each edge on another following line
 
-Example input: <br/>
-a,b,c <br/>
-a --- b <br/>
-b --- c <br/>
-c --- a <br/>
-<br />
-Example output: <br/>
-Matching: <br/>
+```
+Example input:
+a,b,c 
+a --- b 
+b --- c 
+c --- a 
+
+Example output:
+Matching:
 c --- a
+```
