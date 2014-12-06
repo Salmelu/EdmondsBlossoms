@@ -1,0 +1,8 @@
+Graph G {
+c,e,a,d,b
+e -- d  [color="red"]
+c -- b  [color="red"]
+c -- d  [color="black"]
+e -- a  [color="black"]
+a -- b  [color="black"]
+}

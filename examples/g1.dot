@@ -1,0 +1,18 @@
+Graph G {
+f,g,m,e,i,k,d,c,l,n,j,a,b,h
+j -- i  [color="red"]
+k -- m  [color="red"]
+l -- n  [color="red"]
+h -- g  [color="red"]
+a -- f  [color="red"]
+b -- c  [color="red"]
+d -- e  [color="red"]
+f -- g  [color="black"]
+m -- l  [color="black"]
+e -- a  [color="black"]
+i -- d  [color="black"]
+k -- j  [color="black"]
+d -- c  [color="black"]
+l -- j  [color="black"]
+a -- b  [color="black"]
+}

@@ -21,7 +21,7 @@ public class Matching {
 	/**
 	 * Gets a neighbour vertex of v, which is matched along with v
 	 * @param v a vertex in this matching
-	 * @return matched v's neighbour 
+	 * @return matched v's neighbour, null if v isn't matched
 	 */
 	public Vertex getMatchedVertex(Vertex v) {
 		for(Edge e : edges) {

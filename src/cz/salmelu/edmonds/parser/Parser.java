@@ -4,9 +4,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import cz.salmelu.edmonds.Edge;
@@ -44,13 +48,14 @@ public class Parser {
 	}
 	
 	public static void main(String args[]) {
-		if(args.length < 1) {
-			System.out.println("No arguments found. Pass file names as arguments.");
-			System.out.println("Format of the files:");
-			System.out.println("List of vertices split by a comma, e.g. 'a,b,c,d'");
-			System.out.println("Each following line contains one edge, in format 'a --- c'");
-		}
+		boolean printDot = true;
+		boolean foundFile = false;
 		for(String fileName : args) {
+			if(fileName.equals("-n")) {
+				printDot = false;
+				continue;
+			}
+			foundFile = true;
 			File f = new File(fileName);
 			if(!f.exists() || !f.canRead()) {
 				System.out.println("File " + fileName + " doesn't exist, or isn't readable.");
@@ -63,7 +68,57 @@ public class Parser {
 				for(Edge e : m.getEdges()) {
 					System.out.println(e.v1.getId() + " --- " + e.v2.getId());
 				}
+				if(printDot) {
+					File out = null;
+					if(fileName.contains(".")) {
+						out = new File(fileName.substring(0, fileName.lastIndexOf(".")) + ".dot");
+					}
+					else {
+						out = new File(fileName + ".dot");
+					}
+					try (PrintStream ps = new PrintStream(new FileOutputStream(out))) {
+						ps.println("Graph G {");
+						int size = g.getVertexMap().keySet().size();
+						int i = 0;
+						for(Vertex v : g.getVertexMap().keySet()) {
+							i++;
+							ps.print(v.getId());
+							if(i != size) ps.print(",");
+						}
+						ps.println();
+						Set<Set<Vertex>> added = new HashSet<>();
+						for(Edge e : m.getEdges()) {
+							HashSet<Vertex> hs = new HashSet<>();
+							hs.add(e.v1);
+							hs.add(e.v2);
+							added.add(hs);
+							ps.println(e.v1.getId() + " -- " + e.v2.getId() + "  [color=\"red\"]");
+						}
+						for(Vertex v : g.getVertexMap().keySet()) {
+							for(Vertex w : g.getVertexMap().get(v)) {
+								HashSet<Vertex> hs = new HashSet<>();
+								hs.add(v);
+								hs.add(w);
+								int sizeHS = added.size();
+								added.add(hs);
+								if(sizeHS != added.size()) {
+									ps.println(v.getId() + " -- " + w.getId() + "  [color=\"black\"]");
+								}
+							}
+						}
+						ps.println("}");
+					} catch (FileNotFoundException e) {
+						System.out.println("Couldn't generate a dot file " + out.getPath());
+					}
+				}
 			}
+		}
+		if(!foundFile) {
+			System.out.println("No arguments found. Pass file names as arguments.");
+			System.out.println("If the first argument is -n, doesn't create dot files");
+			System.out.println("Format of the files:");
+			System.out.println("List of vertices split by a comma, e.g. 'a,b,c,d'");
+			System.out.println("Each following line contains one edge, in format 'a --- c'");
 		}
 	}
 }

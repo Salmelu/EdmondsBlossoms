@@ -76,9 +76,17 @@ public class Contraction {
 				v = q;
 			}
 		}
-		m.removeEdge(u, s);
-		m.addEdge(v, u);
+		// There is no edge matched, something like C_2k+1 happened
+		if(u != null) {
+			m.removeEdge(u, s);
+			m.addEdge(v, u);
+		}
 		Vertex w = null;
+		// Simulate starting edge in the circle
+		if(v == null) {
+			v = it.next();
+			w = v;
+		}
 		while(w != v) {
 			w = it.next();
 		}

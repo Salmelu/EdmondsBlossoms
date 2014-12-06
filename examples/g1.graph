@@ -1,0 +1,17 @@
+a,b,c,d,e,f,g,h,i,j,k,l,m,n
+
+a --- b
+b --- c
+c --- d
+d --- e
+e --- a
+a --- f
+f --- g
+g --- h
+d --- i
+i --- j
+j --- k
+k --- m
+m --- l
+l --- j
+l --- n

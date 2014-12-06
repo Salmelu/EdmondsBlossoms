@@ -1,0 +1,13 @@
+a,b,c,d,e,f,g,h,i,j,k,l
+b --- c
+c --- d
+e --- f
+f --- g
+g --- h
+h --- e
+i --- j
+i --- k
+i --- l
+j --- k
+j --- l
+k --- l
